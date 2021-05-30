@@ -1,12 +1,15 @@
 package com.food.shop.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Product {
-
+public class Product implements Serializable {
+    private static final long serialVersionUID = 476342823034974688L;
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +21,8 @@ public class Product {
 
         private String img;
 
-        @ManyToOne(fetch = FetchType.LAZY)
+        @JsonIgnore
+        @ManyToOne()
         @JoinColumn(name = "category_id")
         private Category category;
 
@@ -63,6 +67,10 @@ public class Product {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     @Override
