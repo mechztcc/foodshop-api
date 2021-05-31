@@ -1,9 +1,7 @@
 package com.food.shop.resources;
 
 import com.food.shop.domain.Category;
-import com.food.shop.domain.Product;
 import com.food.shop.dto.CategoryDTO;
-import com.food.shop.dto.ProductDTO;
 import com.food.shop.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
