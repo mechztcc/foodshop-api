@@ -10,6 +10,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -38,5 +42,12 @@ public class ProductResource {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(prod.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
+
+    @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+       productService.delete(id);
+       return ResponseEntity.noContent().build();
+    }
+    
 
 }

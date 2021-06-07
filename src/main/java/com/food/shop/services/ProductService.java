@@ -6,6 +6,7 @@ import com.food.shop.domain.Product;
 import com.food.shop.dto.ProductDTO;
 import com.food.shop.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,16 @@ public class ProductService {
         Product prod = new Product(null, prodDTO.getName(), prodDTO.getPrice(), prodDTO.getImg(), category);
         productRepository.save(prod);
         return prod;
+    }
+
+    public void delete(Integer id) {
+
+        try {
+            productRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new DataIntegrityViolationException("Error a o excluir!");
+        }
+
     }
 
 }

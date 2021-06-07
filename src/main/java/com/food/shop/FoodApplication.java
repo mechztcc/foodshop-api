@@ -4,6 +4,8 @@ import com.food.shop.domain.Category;
 import com.food.shop.domain.Product;
 import com.food.shop.repositories.CategoryRepository;
 import com.food.shop.repositories.ProductRepository;
+import com.food.shop.services.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +22,9 @@ public class FoodApplication implements CommandLineRunner {
 
 	@Autowired
 	ProductRepository productRepository;
+
+	// @Autowired
+	// ProductService productService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FoodApplication.class, args);
@@ -44,6 +49,10 @@ public class FoodApplication implements CommandLineRunner {
 		productRepository.save(prod1);
 		productRepository.save(prod2);
 		productRepository.save(prod3);
+
+		// productService.delete(prod1.getId());
+
+
 
 	}
 }
