@@ -1,6 +1,7 @@
 package com.food.shop.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration
@@ -33,9 +35,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 
         // this way only GET its allowed to no auth clients
-        http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATHERS_GET).permitAll().anyRequest().authenticated();
-        // http.authorizeRequests().antMatchers(PUBLIC_MATHERS).permitAll().anyRequest().authenticated();
+        // http.authorizeRequests().antMatchers(HttpMethod.GET, PUBLIC_MATHERS_GET).permitAll().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers(PUBLIC_MATHERS).permitAll().anyRequest().authenticated();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
+    @Bean
+    public BCryptPasswordEncoder bcryCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+
+    }
 }
