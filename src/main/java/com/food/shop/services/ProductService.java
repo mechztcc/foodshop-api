@@ -43,7 +43,7 @@ public class ProductService {
         try {
             productRepository.deleteById(id);
         } catch (Exception e) {
-            throw new DataIntegrityViolationException("Error a o excluir!");
+            throw new DataIntegrityViolationException("Error a o excluir produto!");
         }
 
     }

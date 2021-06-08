@@ -4,6 +4,7 @@ import com.food.shop.domain.Category;
 import com.food.shop.dto.CategoryDTO;
 import com.food.shop.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,16 @@ public class CategoryService {
         Category cat = new Category(null, catDTO.getName());
         return cat = categoryRepository.save(cat);
 
+    }
+
+
+    public void delete(Integer id) {
+
+        try {
+            categoryRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new DataIntegrityViolationException("Error a o excluir categoria!");
+        }
     }
 
 }
